@@ -38,6 +38,9 @@ http.get("/repos/{org}/{repo}/contributors", "zalando", "riptide")
 Feel free to compare this e.g. to [Feign](https://github.com/Netflix/feign#basics) or
 [Retrofit](https://github.com/square/retrofit/blob/master/samples/src/main/java/com/example/retrofit/SimpleService.java).
 
+Also check out our [Riptide tutorial](https://engineering.zalando.com/posts/2023/06/riptide-http-client-tutorial.html) 
+for beginners to see the full examples. 
+
 ## Features
 - full access to the underlying HTTP client
 - [resilience](docs/resilience.md) built into it
@@ -329,11 +332,16 @@ no wildcard condition.
 
 Riptide comes with a way to register extensions in the form of plugins.
 
-- `OriginalStackTracePlugin`, preserves stack traces when executing requests asynchronously
-- [`AuthorizationPlugin`](#riptide-auth), adds `Authorization` support
+- [`OriginalStackTracePlugin`](riptide-core/src/main/java/org/zalando/riptide/OriginalStackTracePlugin.java), preserves stack traces when executing requests asynchronously
+- [`AuthorizationPlugin`](riptide-auth), adds `Authorization` support
 - [`FailsafePlugin`](riptide-failsafe), adds retries, circuit breaker, backup requests and timeout support
 - [`MicrometerPlugin`](riptide-micrometer), adds metrics for request duration
 - [`TransientFaults`](riptide-faults), detects transient faults, e.g. network issues
+- [`ChaosPlugin`](riptide-chaos), adds [Chaos](https://en.wikipedia.org/wiki/Chaos_engineering) and [Fault/Failure Injection](https://en.wikipedia.org/wiki/Fault_injection)
+- [`RequestCompressionPlugin`](riptide-compression), adds support to compress request bodies
+- [`LogbookPlugin`](riptide-logbook), adds [Logbook](https://github.com/zalando/logbook) support
+- [`OpenTelemetryPlugin`](riptide-opentelemetry), adds [OpenTelemetry](https://opentelemetry.io/) support
+- [`OpenTracingPlugin`](riptide-opentracing), adds [OpenTracing](https://opentracing.io/) support
 
 Whenever you encounter the need to perform some repetitive task on the futures returned by a remote call,
 you may consider implementing a custom Plugin for it.
